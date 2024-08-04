@@ -8,7 +8,9 @@ import { useEffect, useState } from "react";
 import { SelectedPage } from "@/shared/types";
 
 function App() {
-  const [selectedPage, setSelectedPage] = useState<SelectedPage>(SelectedPage.Home);
+  const [selectedPage, setSelectedPage] = useState<SelectedPage>(
+    SelectedPage.Home,
+  );
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
 
   useEffect(() => {
@@ -19,26 +21,28 @@ function App() {
       } else {
         setIsTopOfPage(false);
       }
-    }
+    };
     // when we're handling window type objects, we always want to add the event listener
     window.addEventListener("scroll", handleScroll);
-    // return is whenever the component disappears 
-    return () => window.removeEventListener("scroll", handleScroll); // this will allow to remove when they leave the page 
+    // return is whenever the component disappears
+    return () => window.removeEventListener("scroll", handleScroll); // this will allow to remove when they leave the page
     // if not done, this could lead to memory leaks and certain bugs that are not ideal.(?)
   }, []);
 
-  return <div className="app bg-gray-20">
-    <Navbar 
-      isTopOfPage={isTopOfPage}
-      selectedPage={selectedPage} 
-      setSelectedPage={setSelectedPage}
-    />
-    <Home setSelectedPage={setSelectedPage} />
-    <Benefits setSelectedPage={setSelectedPage} />
-    <OurClasses setSelectedPage={setSelectedPage} />
-    <ContactUs setSelectedPage={setSelectedPage} />
-    <Footer />
-  </div>;
+  return (
+    <div className="app bg-gray-20">
+      <Navbar
+        isTopOfPage={isTopOfPage}
+        selectedPage={selectedPage}
+        setSelectedPage={setSelectedPage}
+      />
+      <Home setSelectedPage={setSelectedPage} />
+      <Benefits setSelectedPage={setSelectedPage} />
+      <OurClasses setSelectedPage={setSelectedPage} />
+      <ContactUs setSelectedPage={setSelectedPage} />
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
